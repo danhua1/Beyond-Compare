@@ -1,0 +1,271 @@
+{
+  "recordedAt": "2026-10-20",
+  "before": {
+    "environment": {
+      "node": "v22.14.0",
+      "platform": "darwin",
+      "arch": "arm64",
+      "cpu": "Apple M1 Pro"
+    },
+    "samples": 3,
+    "cases": {
+      "identical": [
+        {
+          "ms": 30.84,
+          "work": 20000,
+          "progress": 9,
+          "status": "ok"
+        },
+        {
+          "ms": 30.1,
+          "work": 20000,
+          "progress": 9,
+          "status": "ok"
+        },
+        {
+          "ms": 21.65,
+          "work": 20000,
+          "progress": 9,
+          "status": "ok"
+        }
+      ],
+      "sparse": [
+        {
+          "ms": 0.61,
+          "work": 1000,
+          "progress": 0,
+          "status": "ok"
+        },
+        {
+          "ms": 0.81,
+          "work": 1000,
+          "progress": 0,
+          "status": "ok"
+        },
+        {
+          "ms": 0.73,
+          "work": 1000,
+          "progress": 0,
+          "status": "ok"
+        }
+      ],
+      "different": [
+        {
+          "ms": 1496.16,
+          "work": 2000001,
+          "progress": 976,
+          "status": "uncompared",
+          "reason": "diff-budget"
+        },
+        {
+          "ms": 1827.93,
+          "work": 2000001,
+          "progress": 976,
+          "status": "uncompared",
+          "reason": "diff-budget"
+        },
+        {
+          "ms": 1782.87,
+          "work": 2000001,
+          "progress": 976,
+          "status": "uncompared",
+          "reason": "diff-budget"
+        }
+      ],
+      "repeated": [
+        {
+          "ms": 75.51,
+          "work": 90600,
+          "progress": 44,
+          "status": "ok"
+        },
+        {
+          "ms": 85.59,
+          "work": 90600,
+          "progress": 44,
+          "status": "ok"
+        },
+        {
+          "ms": 87.31,
+          "work": 90600,
+          "progress": 44,
+          "status": "ok"
+        }
+      ],
+      "near-line-limit": [
+        {
+          "ms": 55.34,
+          "work": 20000,
+          "progress": 9,
+          "status": "ok"
+        },
+        {
+          "ms": 26.5,
+          "work": 20000,
+          "progress": 9,
+          "status": "ok"
+        },
+        {
+          "ms": 21.68,
+          "work": 20000,
+          "progress": 9,
+          "status": "ok"
+        }
+      ]
+    },
+    "cancellation": [
+      {
+        "totalMs": 5.01,
+        "afterAbortMs": 0.21,
+        "status": "uncompared",
+        "reason": "cancelled"
+      },
+      {
+        "totalMs": 7.64,
+        "afterAbortMs": 1.23,
+        "status": "uncompared",
+        "reason": "cancelled"
+      },
+      {
+        "totalMs": 5.15,
+        "afterAbortMs": 0.06,
+        "status": "uncompared",
+        "reason": "cancelled"
+      }
+    ]
+  },
+  "after": {
+    "environment": {
+      "node": "v22.14.0",
+      "platform": "darwin",
+      "arch": "arm64",
+      "cpu": "Apple M1 Pro"
+    },
+    "samples": 3,
+    "cases": {
+      "identical": [
+        {
+          "ms": 19.43,
+          "work": 20000,
+          "progress": 0,
+          "status": "ok"
+        },
+        {
+          "ms": 16.19,
+          "work": 20000,
+          "progress": 0,
+          "status": "ok"
+        },
+        {
+          "ms": 20.6,
+          "work": 20000,
+          "progress": 0,
+          "status": "ok"
+        }
+      ],
+      "sparse": [
+        {
+          "ms": 1.07,
+          "work": 1000,
+          "progress": 0,
+          "status": "ok"
+        },
+        {
+          "ms": 1.73,
+          "work": 1000,
+          "progress": 0,
+          "status": "ok"
+        },
+        {
+          "ms": 4.55,
+          "work": 1000,
+          "progress": 0,
+          "status": "ok"
+        }
+      ],
+      "different": [
+        {
+          "ms": 95.22,
+          "work": 2000001,
+          "progress": 1,
+          "status": "uncompared",
+          "reason": "diff-budget"
+        },
+        {
+          "ms": 95.61,
+          "work": 2000001,
+          "progress": 1,
+          "status": "uncompared",
+          "reason": "diff-budget"
+        },
+        {
+          "ms": 88.62,
+          "work": 2000001,
+          "progress": 1,
+          "status": "uncompared",
+          "reason": "diff-budget"
+        }
+      ],
+      "repeated": [
+        {
+          "ms": 6.02,
+          "work": 90600,
+          "progress": 0,
+          "status": "ok"
+        },
+        {
+          "ms": 3.41,
+          "work": 90600,
+          "progress": 0,
+          "status": "ok"
+        },
+        {
+          "ms": 3.45,
+          "work": 90600,
+          "progress": 0,
+          "status": "ok"
+        }
+      ],
+      "near-line-limit": [
+        {
+          "ms": 7.37,
+          "work": 20000,
+          "progress": 0,
+          "status": "ok"
+        },
+        {
+          "ms": 8.6,
+          "work": 20000,
+          "progress": 0,
+          "status": "ok"
+        },
+        {
+          "ms": 8.51,
+          "work": 20000,
+          "progress": 0,
+          "status": "ok"
+        }
+      ]
+    },
+    "cancellation": [
+      {
+        "totalMs": 6.81,
+        "afterAbortMs": 0.18,
+        "status": "uncompared",
+        "reason": "cancelled"
+      },
+      {
+        "totalMs": 6.56,
+        "afterAbortMs": 1.18,
+        "status": "uncompared",
+        "reason": "cancelled"
+      },
+      {
+        "totalMs": 4.59,
+        "afterAbortMs": 0.02,
+        "status": "uncompared",
+        "reason": "cancelled"
+      }
+    ]
+  }
+}

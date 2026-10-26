@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; worker-src 'self'; connect-src 'none'; img-src 'none'; font-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <title>本地文件比较</title>
+  <link rel="stylesheet" href="/src/styles.css">
+  <script type="module" src="/src/main.js"></script>
+</head>
+<body>
+  <main>
+    <header class="page-header">
+      <p class="eyebrow">LOCAL FILE COMPARE</p>
+      <h1>本地文件比较</h1>
+      <p class="privacy-note">文件仅在浏览器本地读取，不上传、不保存、不写回。</p>
+    </header>
+
+    <section class="compare-panel" aria-label="比较输入">
+      <fieldset class="mode-picker">
+        <legend>比较方式</legend>
+        <label><input type="radio" name="mode" value="file" checked> 单文件</label>
+        <label><input type="radio" name="mode" value="directory"> 目录</label>
+      </fieldset>
+
+      <div class="source-grid">
+        <fieldset class="source-side">
+          <legend>左侧</legend>
+          <label for="left-file">选择文件</label>
+          <input id="left-file" class="file-input" type="file">
+          <label for="left-directory" hidden>选择目录</label>
+          <input id="left-directory" class="directory-input" type="file" webkitdirectory multiple hidden>
+          <p id="left-selection" class="selection-note">尚未选择</p>
+        </fieldset>
+        <fieldset class="source-side">
+          <legend>右侧</legend>
+          <label for="right-file">选择文件</label>
+          <input id="right-file" class="file-input" type="file">
+          <label for="right-directory" hidden>选择目录</label>
+          <input id="right-directory" class="directory-input" type="file" webkitdirectory multiple hidden>
+          <p id="right-selection" class="selection-note">尚未选择</p>
+        </fieldset>
+      </div>
+
+      <div class="action-row">
+        <button id="compare" type="button" disabled>开始比较</button>
+        <button id="cancel" class="secondary-button" type="button" disabled>取消</button>
+      </div>
+      <p id="status" class="status" role="status" aria-live="polite">正在加载比较模块…</p>
+    </section>
+
+    <section id="results" class="results-section" aria-labelledby="results-title" hidden>
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">RESULTS</p>
+          <h2 id="results-title">比较结果</h2>
+        </div>
+        <p id="results-summary" class="results-summary"></p>
+      </div>
+      <div class="result-tools">
+        <label for="path-filter">筛选路径</label>
+        <input id="path-filter" type="search" autocomplete="off" placeholder="输入路径关键词">
+        <label for="status-filter">状态</label>
+        <select id="status-filter">
+          <option value="all">全部</option>
+          <option value="different">有差异</option>
+          <option value="same">相同</option>
+          <option value="left-only">仅左侧</option>
+          <option value="right-only">仅右侧</option>
+          <option value="uncompared">未比较</option>
+          <option value="error">错误</option>
+        </select>
+      </div>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th scope="col">相对路径</th><th scope="col">结果</th><th scope="col">操作</th></tr></thead>
+          <tbody id="results-body"></tbody>
+        </table>
+      </div>
+      <nav class="pagination" aria-label="结果分页">
+        <button id="previous-page" class="secondary-button" type="button" aria-label="上一页" disabled>上一页</button>
+        <span id="page-label" aria-live="polite"></span>
+        <button id="next-page" class="secondary-button" type="button" aria-label="下一页" disabled>下一页</button>
+      </nav>
+    </section>
+
+    <section id="text-detail" class="detail-section" aria-labelledby="detail-title" hidden>
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">TEXT DIFF</p>
+          <h2 id="detail-title">文本差异</h2>
+        </div>
+        <label class="check-option"><input id="ignore-whitespace" type="checkbox"> 忽略空白</label>
+        <label class="check-option"><input id="ignore-eol" type="checkbox"> 忽略换行符差异</label>
+      </div>
+      <p id="detail-status" class="status" role="status" aria-live="polite"></p>
+      <div class="table-scroll diff-scroll">
+        <table class="diff-table">
+          <thead><tr><th scope="col">左侧</th><th scope="col">右侧</th></tr></thead>
+          <tbody id="diff-body"></tbody>
+        </table>
+      </div>
+      <nav class="pagination" aria-label="文本差异分页">
+        <button id="previous-diff-page" class="secondary-button" type="button" aria-label="上一页差异" disabled>上一页</button>
+        <span id="diff-page-label" aria-live="polite"></span>
+        <button id="next-diff-page" class="secondary-button" type="button" aria-label="下一页差异" disabled>下一页</button>
+      </nav>
+    </section>
+
+    <details class="self-test">
+      <summary>运行内存自检</summary>
+      <p>使用内存样例验证 Worker，不会读取所选文件。</p>
+      <button id="self-test" class="secondary-button" type="button">运行自检</button>
+    </details>
+
+    <section class="limits-section" aria-labelledby="limits-title">
+      <h2 id="limits-title">处理边界</h2>
+      <p>目录每侧最多 20,000 个文件（单侧超限时整体拒绝）；单文件 50 MiB；按 1 MiB 分块比较，最多两路并发。</p>
+      <p>文本每侧最多 2 MiB、20,000 行；预算不足、读取失败和取消均不会标记为相同。</p>
+      <p>支持 UTF-8 与带 BOM 的 UTF-16LE/BE。目录比较按文件字节判断，文本忽略选项只作用于文本差异。</p>
+      <p>目录选择无法发现空目录；当前面向桌面 Chrome / Edge，需通过本地 HTTP 运行。</p>
+    </section>
+  </main>
+</body>
+</html>
